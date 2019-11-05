@@ -8,10 +8,14 @@ FROM ubuntu:disco-20191030
 WORKDIR /usr/local/bin
 COPY --from=0 /usr/local/bin/icecast .
 COPY --from=0 /usr/local/share/doc/icecast /usr/local/share/doc/icecast
-COPY --from=0 /usr/local/share/icecast /usr/local/share/icecast
+COPY --from=0 /usr/local/share/icecast /usr/share/icecast2
 COPY --from=0 /usr/local/etc/icecast.xml /usr/local/etc/icecast.xml
 
 RUN apt update && apt install -y --no-install-recommends libssl1.1 libcurl4 libxml2 libxslt1.1 libvorbis0a && rm -rf /var/lib/apt/lists/*
 
+RUN useradd icecast && mkdir -p /var/log/icecast2 && chown -R icecast:icecast /var/log/icecast2 
+
 EXPOSE 8000
+
+CMD ["/usr/local/bin/icecast", "-c", "/usr/local/etc/icecast.xml"]
 
