@@ -45,8 +45,10 @@ ENV BRANCH 0.21
 ENV SUBVERSION 16
 ENV VERSION ${BRANCH}.${SUBVERSION}
 COPY --from=mpd-builder /usr/src/mpd/mpd-${VERSION}/output/release/mpd .
-RUN mkdir /etc/mpd
+RUN useradd mpd && mkdir -p /run/mpd && mkdir -p /var/lib/mpd && chown mpd:mpd -R /var/lib/mpd && chown mpd:mpd -R /run/mpd  
 RUN apt update && apt -y --no-install-recommends install libzzip-0-13 libavahi-client3 libsqlite3-0 libshine3 libmpdclient2 libpulse0 libopus0 libiso9660-10 libtwolame0 libmp3lame0 libwildmidi2 libwavpack1 libresid-builder0c2a libsidutils0 libmpg123-0 libmpcdec6 libmodplug1 libmikmod3 libmad0 libgme0 libfaad2 libaudiofile1 libfluidsynth1 libadplug-2.2.1-0v5 libshout3 libao4 libid3tag0 libsoxr0 libyajl2 libnfs11 libmms0 libsmbclient libupnp6 libavutil55 libavcodec57 libavformat57 libcurl4 libcurl3-gnutls libcdio-paranoia2 libcdio-cdda2 
 RUN rm -rf /var/lib/apt/lists/*
+
+EXPOSE 6600
 
 CMD ["./mpd", "--stdout", "--no-daemon"]
