@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  mpd-voice:
+    image: kolbasyatin/mpd-arm:0.21.16
+    container_name: mpd-voice
+    hostname: voice
+    volumes:
+      - ./mpd-voice.conf:/etc/mpd.conf
+      - /mnt/usb1Tb/mds/mds-voice/:/var/data/mds/
+      - mds-voice-data:/var/lib/mpd/
+    ports:
+      - "6600:6600"
+    networks:
+      - mds-network
+
+  mpd-music:
+    image: kolbasyatin/mpd-arm:0.21.16
+    container_name: mpd-music
+    hostname: music
+    volumes:
+      - ./mpd-music.conf:/etc/mpd.conf
+      - /mnt/usb1Tb/mds/mds-music/:/var/data/mds/
+      - mds-music-data:/var/lib/mpd/
+    ports:
+      - "6601:6600"  
+    networks:
+      - mds-network
+        
+  icecast:
+    image: kolbasyatin/icecast-arm:2.4.4
+    container_name: icecast
+    hostname: icecast
+    volumes:
+      - ./icecast.xml:/usr/local/etc/icecast.xml
+    ports:
+      - "8000:8000"
+    networks:
+      - mds-network    
+            
+volumes:
+  mds-music-data:
+    driver: local
+  mds-voice-data:
+    driver: local
+    
+networks:
+  mds-network:   
+    name: mds-network
+    driver: bridge
+      
+           
