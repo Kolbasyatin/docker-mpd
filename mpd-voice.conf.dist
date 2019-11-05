@@ -1,0 +1,42 @@
+music_directory		"/var/data/mds/"
+playlist_directory	"/var/lib/mpd/playlists"
+db_file			"/var/lib/mpd/tag_cache"
+log_file		"/var/lib/mpd/log/mpd.log"
+pid_file		"/run/mpd/pid"
+state_file		"/var/lib/mpd/state"
+sticker_file            "/var/lib/mpd/sticker.sql"
+user			"mpd"
+bind_to_address		"0.0.0.0"
+port			"6600"
+log_level		"default"
+auto_update             "yes"
+follow_outside_symlinks	"yes"
+follow_inside_symlinks	"no"
+#password               "password@read,add,control,admin"
+#default_permissions    "read,add,control,admin"
+input {
+        plugin "curl"
+}
+audio_output {
+	type		"shout"
+	encoding	"mp3"			# optional
+	name		"Модель для сборки - голос"
+	host		"icecast"
+	port		"8000"
+	mount		"/mds_voice.mp3"
+	password	"changepasswordhere"
+#	quality		"5.0"
+	bitrate		"128"
+	format		"44100:16:2"
+	protocol	"icecast2"		# optional
+	user		"source"		# optional
+	description	"Трансляции Модель Для  Сборки - голос"	# optional
+#	url             "http://example.com"    # optional
+#	genre		"jazz"			# optional
+#	public		"no"			# optional
+#	timeout		"2"			# optional
+#	mixer_type      "software"              # optional
+}
+filesystem_charset		"UTF-8"
+id3v1_encoding			"UTF-8"
+
