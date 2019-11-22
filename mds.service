@@ -1,0 +1,15 @@
+[Unit]
+Description=MDS radio project stack
+Requires=docker.service
+After=docker.service
+After=mnt-nas-mds.mount
+
+[Service]
+Restart=always
+WorkingDirectory=/var/projects/mds/production/mds
+ExecStart=/usr/local/bin/docker-compose -f docker-compose.yaml up
+ExecStop=/usr/local/bin/docker-compose -f docker-compose.yaml down
+
+[Install]
+WantedBy=multi-user.target
+

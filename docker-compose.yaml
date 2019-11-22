@@ -48,4 +48,3 @@ networks:
     name: mds-network
     driver: bridge
       
-           
