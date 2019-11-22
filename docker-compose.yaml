@@ -1,5 +1,16 @@
 version: "3.7"
 services:
+  icecast:
+    image: kolbasyatin/icecast-arm:2.4.4
+    container_name: icecast
+    hostname: icecast
+    volumes:
+      - ./icecast.xml:/usr/local/etc/icecast.xml
+    ports:
+      - "8000:8000"
+    networks:
+      - mds-network    
+
   mpd-voice:
     image: kolbasyatin/mpd-arm:0.21.16
     container_name: mpd-voice
@@ -12,6 +23,8 @@ services:
       - "6600:6600"
     networks:
       - mds-network
+    depends_on:
+      - "icecast"
 
   mpd-music:
     image: kolbasyatin/mpd-arm:0.21.16
@@ -25,18 +38,9 @@ services:
       - "6601:6600"  
     networks:
       - mds-network
-        
-  icecast:
-    image: kolbasyatin/icecast-arm:2.4.4
-    container_name: icecast
-    hostname: icecast
-    volumes:
-      - ./icecast.xml:/usr/local/etc/icecast.xml
-    ports:
-      - "8000:8000"
-    networks:
-      - mds-network    
-            
+    depends_on:
+      - "icecast"
+           
 volumes:
   mds-music-data:
     driver: local
