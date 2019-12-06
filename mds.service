@@ -2,7 +2,7 @@
 Description=MDS radio project stack
 Requires=docker.service
 After=docker.service
-After=mnt-nas-mds.mount
+After=mnt-usb1Tb.mount
 
 [Service]
 Restart=always
