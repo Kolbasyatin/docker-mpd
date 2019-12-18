@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   icecast:
-    image: kolbasyatin/icecast-arm:2.4.4
+    image: kolbasyatin/icecast:2.4.4-arm
     container_name: icecast
     hostname: icecast
     volumes:
@@ -12,7 +12,7 @@ services:
       - mds-network    
 
   mpd-voice:
-    image: kolbasyatin/mpd-arm:0.21.16
+    image: kolbasyatin/mpd:0.21.16-arm
     container_name: mpd-voice
     hostname: voice
     volumes:
@@ -27,7 +27,7 @@ services:
       - "icecast"
 
   mpd-music:
-    image: kolbasyatin/mpd-arm:0.21.16
+    image: kolbasyatin/mpd:0.21.16-arm
     container_name: mpd-music
     hostname: music
     volumes:
