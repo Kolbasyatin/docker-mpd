@@ -1,6 +1,6 @@
 FROM ubuntu:latest as mpd-builder
 ENV BRANCH 0.21
-ENV SUBVERSION 16
+ENV SUBVERSION 23 
 ENV VERSION ${BRANCH}.${SUBVERSION}
 WORKDIR /usr/src/mpd/
 RUN apt update && apt -y install g++ \
@@ -42,7 +42,7 @@ RUN  cd mpd-${VERSION} && \
 FROM ubuntu:latest as mpd
 WORKDIR /usr/local/bin
 ENV BRANCH 0.21
-ENV SUBVERSION 16
+ENV SUBVERSION 23 
 ENV VERSION ${BRANCH}.${SUBVERSION}
 COPY --from=mpd-builder /usr/src/mpd/mpd-${VERSION}/output/release/mpd .
 RUN useradd mpd && mkdir -p /run/mpd && mkdir -p /var/lib/mpd && \

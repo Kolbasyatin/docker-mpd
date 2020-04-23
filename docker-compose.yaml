@@ -12,7 +12,7 @@ services:
       - mds-network    
 
   mpd-voice:
-    image: kolbasyatin/mpd:0.21.16-arm
+    image: kolbasyatin/mpd:0.21.23-arm
     container_name: mpd-voice
     hostname: voice
     volumes:
@@ -27,7 +27,7 @@ services:
       - "icecast"
 
   mpd-music:
-    image: kolbasyatin/mpd:0.21.16-arm
+    image: kolbasyatin/mpd:0.21.23-arm
     container_name: mpd-music
     hostname: music
     volumes:
